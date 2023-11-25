@@ -1,13 +1,12 @@
 #if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "")package ${PACKAGE_NAME}
 
-@ExperimentalStdlibApi
 fun main() {
     
 
 }
 
 
-private fun read() = readLine()!!
+private fun read() = readln()
 
 private fun readInt() = read().toInt()
 
