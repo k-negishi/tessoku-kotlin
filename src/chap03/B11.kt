@@ -1,8 +1,17 @@
-#if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "")package ${PACKAGE_NAME}
+package chap03
 
+// https://atcoder.jp/contests/tessoku-book/tasks/tessoku_book_cj
 fun main() {
-    
+    val n = readInt()
+    val a = readIntList()
+    val q = readInt()
 
+    a.sort()
+
+    repeat(q) {
+        val x = readInt()
+        println(a.lowerBound(x))
+    }
 }
 
 
@@ -16,19 +25,9 @@ private fun readDouble() = read().toDouble()
 
 private fun readStringList(): MutableList<String> = read().split(" ").toMutableList()
 
-private fun readIntListFromOne(): MutableList<Int> {
-    val a = listOf(0)
-    val b = readStringList().map { it.toInt() }.toList()
-    return (a + b).toMutableList()
-}
+private fun readIntList(): MutableList<Int> = readStringList().map { it.toInt() }.toMutableList()
 
 private fun readLongList(): MutableList<Long> = readStringList().map { it.toLong() }.toMutableList()
-
-private fun readLongListFromOne(): MutableList<Long> {
-    val a = listOf(0L)
-    val b = readStringList().map { it.toLong() }.toList()
-    return (a + b).toMutableList()
-}
 
 private fun readDoubleList(): MutableList<Double> = readStringList().map { it.toDouble() }.toMutableList()
 
@@ -83,6 +82,3 @@ private fun List<Int>.lowerBound(value: Int): Int {
 
     return left
 }
-
-#end
-#parse("File Header.java")

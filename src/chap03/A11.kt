@@ -1,7 +1,11 @@
-#if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "")package ${PACKAGE_NAME}
+package chap03
 
+// https://atcoder.jp/contests/tessoku-book/tasks/tessoku_book_k
 fun main() {
-    
+    val (n, x) = readIntList()
+    val a = readIntList()
+
+    println(a.binarySearch(x)+1)
 
 }
 
@@ -16,19 +20,9 @@ private fun readDouble() = read().toDouble()
 
 private fun readStringList(): MutableList<String> = read().split(" ").toMutableList()
 
-private fun readIntListFromOne(): MutableList<Int> {
-    val a = listOf(0)
-    val b = readStringList().map { it.toInt() }.toList()
-    return (a + b).toMutableList()
-}
+private fun readIntList(): MutableList<Int> = readStringList().map { it.toInt() }.toMutableList()
 
 private fun readLongList(): MutableList<Long> = readStringList().map { it.toLong() }.toMutableList()
-
-private fun readLongListFromOne(): MutableList<Long> {
-    val a = listOf(0L)
-    val b = readStringList().map { it.toLong() }.toList()
-    return (a + b).toMutableList()
-}
 
 private fun readDoubleList(): MutableList<Double> = readStringList().map { it.toDouble() }.toMutableList()
 
@@ -68,21 +62,3 @@ private fun readLongMatrix(n: Int): MutableList<MutableList<Long>> {
     return matrix
 }
 
-private fun List<Int>.lowerBound(value: Int): Int {
-    var left = 0
-    var right = this.size
-
-    while (left < right) {
-        val mid = left + (right - left) / 2
-        if (this[mid] < value) {
-            left = mid + 1
-        } else {
-            right = mid
-        }
-    }
-
-    return left
-}
-
-#end
-#parse("File Header.java")

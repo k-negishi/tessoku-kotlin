@@ -1,8 +1,28 @@
-#if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "")package ${PACKAGE_NAME}
+package chap03
 
+// https://atcoder.jp/contests/tessoku-book/tasks/tessoku_book_l
 fun main() {
-    
+    val (n, k) = readLongList()
+    val a = readLongListFromOne()
 
+    fun check(x: Long): Boolean {
+        val sum = a.sumOf { x / it }
+        return (sum >= k)
+    }
+
+    var left = 1L
+    var right = 1_000_000_000L
+    while (left < right) {
+        val mid = (left + right) / 2
+        val answer = check(mid)
+        if (!answer) {
+            left = mid + 1
+        } else {
+            right = mid
+        }
+//        println("left: $left")
+    }
+    println(left)
 }
 
 
@@ -15,6 +35,8 @@ private fun readLong() = read().toLong()
 private fun readDouble() = read().toDouble()
 
 private fun readStringList(): MutableList<String> = read().split(" ").toMutableList()
+
+private fun readIntList(): MutableList<Int> = readStringList().map { it.toInt() }.toMutableList()
 
 private fun readIntListFromOne(): MutableList<Int> {
     val a = listOf(0)
@@ -68,21 +90,3 @@ private fun readLongMatrix(n: Int): MutableList<MutableList<Long>> {
     return matrix
 }
 
-private fun List<Int>.lowerBound(value: Int): Int {
-    var left = 0
-    var right = this.size
-
-    while (left < right) {
-        val mid = left + (right - left) / 2
-        if (this[mid] < value) {
-            left = mid + 1
-        } else {
-            right = mid
-        }
-    }
-
-    return left
-}
-
-#end
-#parse("File Header.java")
