@@ -16,6 +16,8 @@ private fun readDouble() = read().toDouble()
 
 private fun readStringList(): MutableList<String> = read().split(" ").toMutableList()
 
+private fun readIntList(): MutableList<Int> = readStringList().map { it.toInt() }.toMutableList()
+
 private fun readIntListFromOne(): MutableList<Int> {
     val a = listOf(0)
     val b = readStringList().map { it.toInt() }.toList()
