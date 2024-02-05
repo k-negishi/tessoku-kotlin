@@ -1,8 +1,25 @@
-#if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "")package ${PACKAGE_NAME}
+package chap03
 
+import java.util.*
+
+// https://atcoder.jp/contests/tessoku-book/tasks/tessoku_book_o
 fun main() {
-    
+//    val n = readInt()
+//    val a = readIntList()
+    // この問題ケース"sample_01.txt"の入力がおかしそう
+    val sc = Scanner(System.`in`)
+    val n = sc.nextInt()
+    val a = mutableListOf<Int>()
+    for (i in 0 until n) {
+        a.add(sc.nextInt())
+    }
 
+    val sortedSet = a.toSet().sorted()
+    val b = a.map {
+        sortedSet.binarySearch(it) + 1
+    }
+
+    println(b.joinToString(" "))
 }
 
 
@@ -70,69 +87,94 @@ private fun readLongMatrix(n: Int): MutableList<MutableList<Long>> {
     return matrix
 }
 
+/**
+ * 二分探索 lowerBound
+ * 二分探索でvalue以上の値が現れる最初の位置を求める
+ *
+ * @param value 検索する値
+ * @return key以上の値が現れる最初の位置
+ */
 private fun List<Int>.lowerBound(value: Int): Int {
     var left = 0
     var right = this.size
 
-    while (left < right) {
-        val mid = left + (right - left) / 2
+    while (left <= right) {
+        val mid = (left + right) / 2
         if (this[mid] < value) {
             left = mid + 1
         } else {
-            right = mid
+            right = mid - 1
         }
     }
 
     return left
 }
 
+/**
+ * 二分探索 lowerBound
+ * 二分探索でvalue以上の値が現れる最初の位置を求める
+ *
+ * @param value 検索する値
+ * @return value以上の値が現れる最初の位置
+ */
 private fun List<Long>.lowerBound(value: Long): Long {
     var left = 0L
     var right = this.size.toLong()
 
-    while (left < right) {
-        val mid = left + (right - left) / 2
+    while (left <= right) {
+        val mid = (left + right) / 2
         if (this[mid.toInt()] < value) {
             left = mid + 1
         } else {
-            right = mid
+            right = mid - 1
         }
     }
 
     return left
 }
 
+/**
+ * 二分探索 upperBound
+ * 二分探索でvalueより大きい値が現れる最初の位置を求める
+ *
+ * @param value 検索する値
+ * @return valueより大きい値が現れる最初の位置
+ */
 private fun List<Int>.upperBound(value: Int): Int {
     var left = 0
     var right = this.size
 
-    while (left < right) {
-        val mid = left + (right - left) / 2
+    while (left <= right) {
+        val mid = (left + right) / 2
         if (this[mid] <= value) {
             left = mid + 1
         } else {
-            right = mid
+            right = mid - 1
         }
     }
 
     return left
 }
 
+/**
+ * 二分探索 upperBound
+ * 二分探索でvalueより大きい値が現れる最初の位置を求める
+ *
+ * @param value 検索する値
+ * @return valueより大きい値が現れる最初の位置
+ */
 private fun List<Long>.upperBound(value: Long): Long {
     var left = 0L
     var right = this.size.toLong()
 
-    while (left < right) {
-        val mid = left + (right - left) / 2
+    while (left <= right) {
+        val mid = (left + right) / 2
         if (this[mid.toInt()] <= value) {
             left = mid + 1
         } else {
-            right = mid
+            right = mid - 1
         }
     }
 
     return left
 }
-
-#end
-#parse("File Header.java")

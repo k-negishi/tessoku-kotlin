@@ -1,8 +1,19 @@
-#if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "")package ${PACKAGE_NAME}
+package chap04
 
+// https://atcoder.jp/contests/tessoku-book/tasks/tessoku_book_p
 fun main() {
-    
+    val n = readInt()
+    val a = mutableListOf(0, 0) + readIntList()
 
+    val b = mutableListOf(0, 0, 0) + readIntList()
+
+    val dp = MutableList(n+1) { 0 }
+    dp[2] = a[2]
+    for(i in 3 .. n) {
+        dp[i] = minOf(dp[i-1] + a[i], dp[i-2] + b[i])
+    }
+
+    println(dp[n])
 }
 
 
@@ -134,5 +145,3 @@ private fun List<Long>.upperBound(value: Long): Long {
     return left
 }
 
-#end
-#parse("File Header.java")
