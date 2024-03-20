@@ -1,35 +1,35 @@
 package chap04
 
-import kotlin.math.max
+// https://atcoder.jp/contests/tessoku-book/tasks/tessoku_book_t
 
-// https://atcoder.jp/contests/tessoku-book/tasks/tessoku_book_s
 fun main() {
-    val (N, W) = readIntList()
-    val w = mutableListOf(0L)
-    val v = mutableListOf(0L)
-    repeat(N) {
-        val (x, y) = readLongList()
-        w.add(x)
-        v.add(y)
-    }
+    val s = read()
+    val t = read()
 
-    val dp = MutableList(N + 1) { MutableList(W + 1) { Long.MIN_VALUE } }
-    // dp
+    val n = s.length
+    val m = t.length
+
+    val dp = MutableList(s.length+1) { MutableList(t.length+1) { 0 } }
     dp[0][0] = 0
-    for (i in 1 until N+1) {
-        for (j in 0 until W+1 ) {
-            if (j < w[i]) {
+
+    for (i in 0 .. n) {
+        for (j in 0 .. m) {
+            if (i >= 1 && j >= 1 && s[i-1] == t[j-1]) {
+                dp[i][j] = maxOf(dp[i-1][j], dp[i][j-1], dp[i-1][j-1]+1)
+
+            } else if (i >= 1 && j >= 1) {
+                dp[i][j] = maxOf(dp[i-1][j], dp[i][j-1])
+
+            } else if (i >= 1) {
                 dp[i][j] = dp[i-1][j]
-                continue
+
+            } else if (j >= 1) {
+                dp[i][j] = dp[i][j-1]
             }
-
-            dp[i][j] = max(dp[i-1][j], dp[i-1][(j-w[i]).toInt()] + v[i])
-
         }
     }
 
-    val ans = dp.maxOf { it.max() }
-    println(ans)
+    println(dp[n][m])
 
 
 }
